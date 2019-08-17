@@ -1,0 +1,37 @@
+{% extends 'forum/base.html' %}
+
+{%  block content %}
+    <div class="container-fluid">
+        <form method="POST" action="{% url 'ask' %}">
+            {% csrf_token %}
+            <label for="formGroupExampleInput"> <b>Ask your Questions</b> </label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="What's your question?" name="question"/>
+                <button type="submit" class="button-form btn btn-primary"> Post </button>
+        </form>
+    </div>
+
+    <div class="container-fluid">
+            {%  if original %}
+                <p> {{ original }}</p>
+            {% endif %}
+
+            {% if duplicates != None %}
+                {% for d in duplicates %}
+                    <p> The related questions are: </p>
+                        <div class="card w-75">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ d.pk }}. {{ d.question }} </h5>
+                                <p class="card-text">{{ d.answer }}</p>
+                            </div>
+                        </div>
+                {% endfor %}
+            {% endif %}
+            {%  if msg %}
+                <p> There were no duplicate question for {%  if original %} {{ original }} {% endif %}. Your questions has been added. </p>
+            {% endif %}
+
+
+    </div>
+
+
+{% endblock %}

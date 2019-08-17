@@ -1,0 +1,17 @@
+{% extends 'forum/base.html' %}
+
+{% block content %}
+
+    {% for q in qa %}
+        <div class="card w-75">
+            <div class="card-body">
+                <h5 class="card-title">{{ q.pk }}. {{ q.question }} </h5>
+                {% if q.answer|length == 0 %}
+                    <a href="{% url 'answer' q.pk %}"> Give Answer </a>
+                {% else %}
+                    <p class="card-text">{{ q.answer }}</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

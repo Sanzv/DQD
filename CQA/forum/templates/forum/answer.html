@@ -1,0 +1,16 @@
+{% extends 'forum/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="form-group">
+        <form method="POST" action="{% url 'answer' qid %}" >
+            {% csrf_token %}
+            {{ form |crispy}}
+            <div class="form-group">
+                <button class="bth btn-outline-info" type="submit">
+                    Update
+                </button>
+            </div>
+        </form>
+
+{% endblock %}
